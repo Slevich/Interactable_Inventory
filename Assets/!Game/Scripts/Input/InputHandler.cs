@@ -13,7 +13,7 @@ public static class InputHandler
     #region Properties
     public static Subject<Vector2> PointerPositionUpdate { get; private set; }
     public static Subject<bool> DragIsInProgress { get; private set; }
-    public static Subject<bool> DeselectIsInProgress{ get; private set; }
+    public static Subject<bool> RotateIsInProgress{ get; private set; }
     #endregion
 
     #region Constructor
@@ -26,7 +26,7 @@ public static class InputHandler
         _inputActions = new InputSystem_Actions();
         PointerPositionUpdate = new Subject<Vector2>();
         DragIsInProgress = new Subject<bool>();
-        DeselectIsInProgress = new Subject<bool>();
+        RotateIsInProgress = new Subject<bool>();
         _update = new ActionUpdate();
     }
 
@@ -34,6 +34,7 @@ public static class InputHandler
     {
         PointerPositionUpdate.OnNext(_inputActions.Player.Pointer.ReadValue<Vector2>());
         DragIsInProgress.OnNext(_inputActions.Player.Drag.IsInProgress());
+        RotateIsInProgress.OnNext(_inputActions.Player.Rotate.IsInProgress());
     }
     
     public static void Enable()
