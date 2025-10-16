@@ -227,7 +227,6 @@ public class ProductionCell
     {
         EffectivityPercentage = NewEffectivityPercentage;
         TimeToProduct = ProductionSettings.CalculateTotalTimeToProduct(EffectivityPercentage);
-        Debug.Log("Effectivity recalculated! New effectivity: "  + EffectivityPercentage + "Time: " + TimeToProduct);
     }
 
     public void UpdatePrimaryResourceType(ProductionSettings.ResourceType NewResourceType)
