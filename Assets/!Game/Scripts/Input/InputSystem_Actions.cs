@@ -53,6 +53,33 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TimeAccelerationX1"",
+                    ""type"": ""Button"",
+                    ""id"": ""491a7a00-e6d8-4e12-b1bd-4ee2d39175c2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TimeAccelerationX2"",
+                    ""type"": ""Button"",
+                    ""id"": ""6594652b-0e63-4e3e-b74b-389751320d5c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TimeAccelerationX3"",
+                    ""type"": ""Button"",
+                    ""id"": ""5abee5f5-6e1e-4ce2-bee5-77f7d3898a06"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -86,6 +113,39 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""99f8b32c-1f98-41c2-a526-439afd6466f4"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""TimeAccelerationX1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5cc23251-c9a9-48ad-bc90-a937d2514ecb"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""TimeAccelerationX2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cea88a69-e790-49b5-81c5-913196509886"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""TimeAccelerationX3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -676,6 +736,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
         m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        m_Player_TimeAccelerationX1 = m_Player.FindAction("TimeAccelerationX1", throwIfNotFound: true);
+        m_Player_TimeAccelerationX2 = m_Player.FindAction("TimeAccelerationX2", throwIfNotFound: true);
+        m_Player_TimeAccelerationX3 = m_Player.FindAction("TimeAccelerationX3", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -758,6 +821,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pointer;
     private readonly InputAction m_Player_Drag;
     private readonly InputAction m_Player_Rotate;
+    private readonly InputAction m_Player_TimeAccelerationX1;
+    private readonly InputAction m_Player_TimeAccelerationX2;
+    private readonly InputAction m_Player_TimeAccelerationX3;
     public struct PlayerActions
     {
         private @InputSystem_Actions m_Wrapper;
@@ -765,6 +831,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
         public InputAction @Drag => m_Wrapper.m_Player_Drag;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+        public InputAction @TimeAccelerationX1 => m_Wrapper.m_Player_TimeAccelerationX1;
+        public InputAction @TimeAccelerationX2 => m_Wrapper.m_Player_TimeAccelerationX2;
+        public InputAction @TimeAccelerationX3 => m_Wrapper.m_Player_TimeAccelerationX3;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -783,6 +852,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
+            @TimeAccelerationX1.started += instance.OnTimeAccelerationX1;
+            @TimeAccelerationX1.performed += instance.OnTimeAccelerationX1;
+            @TimeAccelerationX1.canceled += instance.OnTimeAccelerationX1;
+            @TimeAccelerationX2.started += instance.OnTimeAccelerationX2;
+            @TimeAccelerationX2.performed += instance.OnTimeAccelerationX2;
+            @TimeAccelerationX2.canceled += instance.OnTimeAccelerationX2;
+            @TimeAccelerationX3.started += instance.OnTimeAccelerationX3;
+            @TimeAccelerationX3.performed += instance.OnTimeAccelerationX3;
+            @TimeAccelerationX3.canceled += instance.OnTimeAccelerationX3;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -796,6 +874,15 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
+            @TimeAccelerationX1.started -= instance.OnTimeAccelerationX1;
+            @TimeAccelerationX1.performed -= instance.OnTimeAccelerationX1;
+            @TimeAccelerationX1.canceled -= instance.OnTimeAccelerationX1;
+            @TimeAccelerationX2.started -= instance.OnTimeAccelerationX2;
+            @TimeAccelerationX2.performed -= instance.OnTimeAccelerationX2;
+            @TimeAccelerationX2.canceled -= instance.OnTimeAccelerationX2;
+            @TimeAccelerationX3.started -= instance.OnTimeAccelerationX3;
+            @TimeAccelerationX3.performed -= instance.OnTimeAccelerationX3;
+            @TimeAccelerationX3.canceled -= instance.OnTimeAccelerationX3;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -981,6 +1068,9 @@ public partial class @InputSystem_Actions: IInputActionCollection2, IDisposable
         void OnPointer(InputAction.CallbackContext context);
         void OnDrag(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnTimeAccelerationX1(InputAction.CallbackContext context);
+        void OnTimeAccelerationX2(InputAction.CallbackContext context);
+        void OnTimeAccelerationX3(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

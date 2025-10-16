@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _graphic: {fileID: 0}
-  _gridItem: {fileID: 0}
   _grid: {fileID: 0}
+  _gridItem: {fileID: 0}
+  _productionSettings: {fileID: 0}
+  _isProductiveCell: 0
   _gridPosition: {x: 0, y: 0}
   _cellSize: {x: 0, y: 0}
   <Initialized>k__BackingField: 0
@@ -141,7 +143,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3599215585295985067, guid: 0d16cab2534ca5e4cb963a9b1160e857, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d16cab2534ca5e4cb963a9b1160e857, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

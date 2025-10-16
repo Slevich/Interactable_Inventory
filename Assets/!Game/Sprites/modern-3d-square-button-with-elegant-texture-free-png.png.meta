@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0d16cab2534ca5e4cb963a9b1160e857
+guid: 636ff5352bf4d2b47bbce137d0f0e44a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3599215585295985067
-    second: BlackBorderSquare_0
+      213: 2940743644919405384
+    second: modern-3d-square-button-with-elegant-texture-free-png_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 128
+    maxTextureSize: 256
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 3
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BlackBorderSquare_0
+      name: modern-3d-square-button-with-elegant-texture-free-png_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1262
-        height: 1262
+        x: 165
+        y: 166
+        width: 651
+        height: 663
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5561260ae740d0ec0800000000000000
-      internalID: -3599215585295985067
+      spriteID: 84b98eaa3ce9fc820800000000000000
+      internalID: 2940743644919405384
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BlackBorderSquare_0: -3599215585295985067
+      modern-3d-square-button-with-elegant-texture-free-png_0: 2940743644919405384
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -14,6 +14,9 @@ public static class InputHandler
     public static Subject<Vector2> PointerPositionUpdate { get; private set; }
     public static Subject<bool> DragIsInProgress { get; private set; }
     public static Subject<bool> RotateIsInProgress{ get; private set; }
+    public static InputAction TimeScaleX1AccelerationAction{ get; private set; }
+    public static InputAction TimeScaleX2AccelerationAction { get; private set; }
+    public static InputAction TimeScaleX3AccelerationAction { get; private set; }
     #endregion
 
     #region Constructor
@@ -28,6 +31,10 @@ public static class InputHandler
         DragIsInProgress = new Subject<bool>();
         RotateIsInProgress = new Subject<bool>();
         _update = new ActionUpdate();
+
+        TimeScaleX1AccelerationAction = _inputActions.Player.TimeAccelerationX1;
+        TimeScaleX2AccelerationAction = _inputActions.Player.TimeAccelerationX2;
+        TimeScaleX3AccelerationAction = _inputActions.Player.TimeAccelerationX3;
     }
 
     private static void UpdateData()

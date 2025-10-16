@@ -1,20 +1,25 @@
-using System;
+using System;using System.Collections.Generic;
 using UnityEngine;
 
 public class GridCell : MonoBehaviour, IDependenciesInjection<GridCellDependenciesContainer>
 {
     #region Fields
+
     [Header("References.")]
     [SerializeField]
     private SpriteRenderer _graphic;
     [SerializeField]
-    private GridItem _gridItem = null;
-    [SerializeField]
     private InventoryGrid _grid = null;
+    [SerializeField, ReadOnly]
+    private GridItem _gridItem = null;
     #endregion
     
     #region Properties
     [Header("Settings.")]
+    [SerializeField, ReadOnly]
+    private TileProductionSettingsScriptable _productionSettings;
+    [SerializeField, ReadOnly]
+    private bool _isProductiveCell = false;
     [SerializeField] 
     private Vector2Int _gridPosition = Vector2Int.zero;
     [SerializeField]
@@ -24,10 +29,11 @@ public class GridCell : MonoBehaviour, IDependenciesInjection<GridCellDependenci
     public bool Initialized { get; set; } = false;
     
     public Vector2Int GridPosition => _gridPosition;
-    public Transform Parent => transform.parent;
     public GridItem GridItem => _gridItem;
+    public Vector2 CellSize => _cellSize;
     public bool Busy => _gridItem != null;
-
+    public bool IsProductive => _isProductiveCell;
+    public TileProductionSettingsScriptable ProductionSettings => _productionSettings;
     #endregion
     
     #region Methods
@@ -37,49 +43,29 @@ public class GridCell : MonoBehaviour, IDependenciesInjection<GridCellDependenci
             return;
 
         _graphic = Container.Graphic;
-        Initialize();
     }
 
-    public void Initialize()
+    private void UpdateVisual()
     {
+        if(_productionSettings == null)
+            return;
         
+        if (_graphic != null)
+            _graphic.color = global::ProductionSettings.TileColors[_productionSettings.TileType];
     }
-    
-    // public bool PositionIsInCell(Vector2 WorldPosition)
-    // {
-    //     Vector2 worldPosition = WorldPosition - (Vector2)this.WorldPosition;
-    //     
-    //     float halfWidth = WorldCellSize.x / 2f;
-    //     float halfHeight = WorldCellSize.y / 2f;
-    //     
-    //     float dx = Mathf.Abs(worldPosition.x) / halfWidth;
-    //     float dy = Mathf.Abs(worldPosition.y) / halfHeight;
-    //     
-    //     return (dx + dy) <= 1f;
-    // }
 
-    public void SetValues()
-    {
-        
-    }
-    
-    public void AddItem(GridItem Item)
-    {
-        if(Item == null)
-            return;
-        
-        _gridItem = Item;
-    }
-    
-    public void RemoveItem()
-    {
-        if(!Busy)
-            return;
-        
-        _gridItem = null;
-    }
+    #region Getters
+    public Bounds GetBounds() => _graphic.bounds;
+    #endregion
+
 
     #region Setters
+    public void SetProductionSettings(TileProductionSettingsScriptable NewSettings)
+    {
+        _productionSettings = NewSettings;
+        UpdateVisual();
+    }
+    
     public void SetGrid(InventoryGrid NewGrid)
     {
         if(_grid !=  null)
@@ -98,44 +84,13 @@ public class GridCell : MonoBehaviour, IDependenciesInjection<GridCellDependenci
         if(_graphic == null)
             return;
 
-        switch (_graphic.drawMode)
-        {
-            case SpriteDrawMode.Simple:
-            {
-                if (_graphic.sprite == null)
-                    return;
-
-                Vector2 spriteSize = _graphic.sprite.bounds.size;
-                if (spriteSize.x <= 0 || spriteSize.y <= 0)
-                    return;
-
-                Vector3 newScale = new Vector3(
-                    _cellSize.x / spriteSize.x,
-                    _cellSize.y / spriteSize.y,
-                    1f
-                );
-
-                _graphic.transform.localScale = newScale;
-                break;
-            }
-
-            case SpriteDrawMode.Sliced:
-            case SpriteDrawMode.Tiled:
-            {
-                _graphic.size = _cellSize;
-                _graphic.transform.localScale = Vector3.one;
-                break;
-            }
-
-            default:
-            {
-                Debug.LogWarning($"Unsupported SpriteDrawMode: {_graphic.drawMode}");
-                break;
-            }
-        }
+        SpriteScaler.ScaleSpriteFromRenderer(_graphic, _cellSize);
     }
     
     public void SetGridPosition(Vector2Int NewPosition) => _gridPosition = NewPosition;
+    public void SetItem(GridItem NewItem) => _gridItem = NewItem;
+    
+    public void SetProductiveCellState(bool NewState) => _isProductiveCell = NewState;
     #endregion
     #endregion
 }
